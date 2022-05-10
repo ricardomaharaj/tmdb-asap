@@ -1,19 +1,32 @@
 {
-  "name": "tmdb-asap",
-  "private": true,
-  "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "axios": "^0.27.2",
-    "preact": "^10.5.15"
-  },
-  "devDependencies": {
-    "@preact/preset-vite": "^2.1.5",
-    "typescript": "^4.5.4",
-    "vite": "^2.9.5"
-  }
+    "name": "tmdb-asap",
+    "version": "0",
+    "private": true,
+    "dependencies": {
+        "axios": "0.27.2",
+        "react": "18.1.0",
+        "react-dom": "18.1.0",
+        "react-scripts": "5.0.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }

@@ -18,8 +18,3 @@ body {
     display: flex;
     flex-direction: column;
 }
-
-input {
-    width: 100%;
-    padding: 2px;
-}

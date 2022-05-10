@@ -1,6 +1,3 @@
 # TMDB-ASAP
 
-This is a experimental version of my other tmdb project 
-https://github.com/ricardomaharaj/TMDB-Quickly
-
-key differences are that this project does not use any dependencies other than preact and axios
+This is a different take on my project [TMDB Quickly](https://github.com/ricardomaharaj/TMDB-Quickly)
