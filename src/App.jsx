@@ -4,17 +4,6 @@ import { useState } from 'react'
 const IMG = 'https://www.themoviedb.org/t/p/w94_and_h141_bestv2'
 const IMGW = 'https://www.themoviedb.org/t/p/w227_and_h127_bestv2'
 
-function ImageRow(props) {
-    return <div className='row'>
-        {props.image && <div className='col'>
-            <img src={IMG + props.image} alt='' />
-        </div>}
-        <div className='col'>
-            {props.children}
-        </div>
-    </div>
-}
-
 export function App() {
 
     let [tab, setTab] = useState(0)
@@ -32,18 +21,18 @@ export function App() {
             </div>
             {tab === 0 && <>
                 <div className='row'>
-                    <input type='text' onKeyDown={e => e.key === 'Enter' ? TMDB.find(e.currentTarget.value).then(x => setResults(x.results)) : null} />
+                    <input type='text' onKeyDown={e => e.key === 'Enter' ? TMDB.find(e.currentTarget.value).then(x => setResults(x?.results)) : null} />
                 </div>
-                {results.map((x, i) =>
+                {results?.map((x, i) =>
                     <div className='row' onClick={() => {
-                        switch (x.media_type) {
+                        switch (x?.media_type) {
                             case 'movie':
-                                TMDB.movie(x.id)
+                                TMDB.movie(x?.id)
                                     .then(x => setMovie(x))
                                 setTab(1)
                                 break
                             case 'tv':
-                                TMDB.show(x.id)
+                                TMDB.show(x?.id)
                                     .then(x => setShow(x))
                                 setTab(2)
                                 break
@@ -51,14 +40,14 @@ export function App() {
                                 break
                         }
                     }} key={i}>
-                        {(x.poster_path || x.profile_path) && <>
+                        {(x?.poster_path || x?.profile_path) && <>
                             <div className='col'>
-                                <img src={IMG + (x.poster_path || x.profile_path)} alt='' />
+                                <img src={IMG + (x?.poster_path || x?.profile_path)} alt='' />
                             </div>
                         </>}
                         <div className='col'>
-                            <div> {x.release_date || x.first_air_date} </div>
-                            <div> {x.name || x.title} </div>
+                            <div> {x?.release_date || x?.first_air_date} </div>
+                            <div> {x?.name || x?.title} </div>
                         </div>
                     </div>
                 )}
@@ -68,45 +57,45 @@ export function App() {
                     <div> BACK </div>
                 </div>
                 <div className='row'>
-                    {movie.poster_path && <>
+                    {movie?.poster_path && <>
                         <div className='col'>
-                            <img src={IMG + movie.poster_path} alt='' />
+                            <img src={IMG + movie?.poster_path} alt='' />
                         </div>
                     </>}
                     <div className='col'>
-                        <div> {movie.release_date} </div>
-                        <div> {movie.title} </div>
+                        <div> {movie?.release_date} </div>
+                        <div> {movie?.title} </div>
                     </div>
                 </div>
                 <div className='row'>
                     {['INFO', 'CAST', 'CREW'].map((x, i) => <div onClick={() => setSubTab(i)} key={i}> {x} </div>)}
                 </div>
                 {subTab === 0 && <>
-                    <div> {movie.overview} </div>
+                    <div> {movie?.overview} </div>
                 </>}
                 {subTab === 1 && <>
-                    {movie.credits.cast.map((x, i) => <div className='row' key={i}>
-                        {x.profile_path && <>
+                    {movie?.credits?.cast?.map((x, i) => <div className='row' key={i}>
+                        {x?.profile_path && <>
                             <div className='col'>
-                                <img src={IMG + x.profile_path} alt='' />
+                                <img src={IMG + x?.profile_path} alt='' />
                             </div>
                         </>}
                         <div className='col'>
-                            <div> {x.name} </div>
-                            <div> {x.character} </div>
+                            <div> {x?.name} </div>
+                            <div> {x?.character} </div>
                         </div>
                     </div>)}
                 </>}
                 {subTab === 2 && <>
-                    {movie.credits.crew.map((x, i) => <div className='row' key={i}>
-                        {x.profile_path && <>
+                    {movie?.credits.crew.map((x, i) => <div className='row' key={i}>
+                        {x?.profile_path && <>
                             <div className='col'>
-                                <img src={IMG + x.profile_path} alt='' />
+                                <img src={IMG + x?.profile_path} alt='' />
                             </div>
                         </>}
                         <div className='col'>
-                            <div> {x.name} </div>
-                            <div> {x.job} </div>
+                            <div> {x?.name} </div>
+                            <div> {x?.job} </div>
                         </div>
                     </div>)}
                 </>}
@@ -116,65 +105,65 @@ export function App() {
                     <div> BACK </div>
                 </div>
                 <div className='row'>
-                    {show.poster_path && <>
+                    {show?.poster_path && <>
                         <div className='col'>
-                            <img src={IMG + show.poster_path} alt='' />
+                            <img src={IMG + show?.poster_path} alt='' />
                         </div>
                     </>}
                     <div className='col'>
-                        <div> {show.first_air_date} </div>
-                        <div> {show.title} </div>
+                        <div> {show?.first_air_date} </div>
+                        <div> {show?.title} </div>
                     </div>
                 </div>
                 <div className='row'>
                     {['INFO', 'SEASONS', 'CAST', 'CREW'].map((x, i) => <div onClick={() => setSubTab(i)} key={i}> {x} </div>)}
                 </div>
                 {subTab === 0 && <>
-                    <div> {show.overview} </div>
+                    <div> {show?.overview} </div>
                 </>}
                 {subTab === 1 && <>
-                    {show.seasons.map((x, i) =>
+                    {show?.seasons.map((x, i) =>
                         <div onClick={() => {
-                            TMDB.season(show.id, x.season_number)
+                            TMDB.season(show?.id, x?.season_number)
                                 .then(x => setSeason(x))
                             setTab(3)
                         }} className='row' key={i}>
-                            {x.poster_path && <>
+                            {x?.poster_path && <>
                                 <div className='col'>
-                                    <img src={IMG + x.poster_path} alt='' />
+                                    <img src={IMG + x?.poster_path} alt='' />
                                 </div>
                             </>}
                             <div className='col'>
-                                <div> {x.air_date} </div>
-                                <div> {x.name} </div>
-                                <div> {x.episode_count} Episodes </div>
+                                <div> {x?.air_date} </div>
+                                <div> {x?.name} </div>
+                                <div> {x?.episode_count} Episodes </div>
                             </div>
                         </div>
                     )}
                 </>}
                 {subTab === 2 && <>
-                    {show.credits.cast.map((x, i) => <div className='row' key={i}>
-                        {x.profile_path && <>
+                    {show?.credits?.cast?.map((x, i) => <div className='row' key={i}>
+                        {x?.profile_path && <>
                             <div className='col'>
-                                <img src={IMG + x.profile_path} alt='' />
+                                <img src={IMG + x?.profile_path} alt='' />
                             </div>
                         </>}
                         <div className='col'>
-                            <div> {x.name} </div>
-                            <div> {x.character} </div>
+                            <div> {x?.name} </div>
+                            <div> {x?.character} </div>
                         </div>
                     </div>)}
                 </>}
                 {subTab === 3 && <>
-                    {show.credits.crew.map((x, i) => <div className='row' key={i}>
-                        {x.profile_path && <>
+                    {show?.credits?.crew?.map((x, i) => <div className='row' key={i}>
+                        {x?.profile_path && <>
                             <div className='col'>
-                                <img src={IMG + x.profile_path} alt='' />
+                                <img src={IMG + x?.profile_path} alt='' />
                             </div>
                         </>}
                         <div className='col'>
-                            <div> {x.name} </div>
-                            <div> {x.job} </div>
+                            <div> {x?.name} </div>
+                            <div> {x?.job} </div>
                         </div>
                     </div>)}
                 </>}
@@ -184,32 +173,41 @@ export function App() {
                     <div> BACK </div>
                 </div>
                 <div className='row'>
-                    {season.poster_path && <>
+                    {season?.poster_path && <>
                         <div className='col'>
-                            <img src={IMG + season.poster_path} alt='' />
+                            <img src={IMG + season?.poster_path} alt='' />
                         </div>
                     </>}
                     <div className='col'>
-                        <div> {season.air_date} </div>
-                        <div> {season.name} </div>
+                        <div> {season?.air_date} </div>
+                        <div> {season?.name} </div>
                     </div>
                 </div>
-                {season.episodes.map((x, i) =>
-                    <div onClick={() => {
-                        TMDB.episode(show.id, season.season_number, x.episode_number)
-                            .then(x => setEpisode(x))
-                        setTab(4)
-                    }} className='row' key={i}>
-                        <div className='col'>
-                            {x.still_path && <>
-                                <div>
-                                    <img src={IMGW + x.still_path} alt='' />
-                                </div>
-                            </>}
-                            <div> {x.episode_number} | {x.name} | {x.air_date} </div>
+                <div className='row'>
+                    {['INFO', 'EPISODES'].map((x, i) => <div onClick={() => setSubTab(i)} key={i}> {x} </div>)}
+                </div>
+                {subTab === 0 && <>
+                    <div> {season?.overview} </div>
+                </>}
+                {subTab === 1 && <>
+                    {season?.episodes?.map((x, i) =>
+                        <div onClick={() => {
+                            TMDB.episode(show?.id, season?.season_number, x?.episode_number)
+                                .then(x => setEpisode(x))
+                            setTab(4)
+                        }} className='row' key={i}>
+                            <div className='col'>
+                                {x?.still_path && <>
+                                    <div>
+                                        <img src={IMGW + x?.still_path} alt='' />
+                                    </div>
+                                </>}
+                                <div> {x?.episode_number} | {x?.name} | {x?.air_date} </div>
+                                <div> {x.overview} </div>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </>}
             </>}
             {tab === 4 && <>
                 <div onClick={() => setTab(3)} className='row'>
@@ -217,14 +215,48 @@ export function App() {
                 </div>
                 <div className='row'>
                     <div className='col'>
-                        {episode.still_path && <>
+                        {episode?.still_path && <>
                             <div>
-                                <img src={IMGW + episode.still_path} alt='' />
+                                <img src={IMGW + episode?.still_path} alt='' />
                             </div>
                         </>}
-                        <div> {episode.episode_number} | {episode.name} | {episode.air_date} </div>
+                        <div> {episode?.episode_number} | {episode?.name} | {episode?.air_date} </div>
                     </div>
                 </div>
+                <div className='row'>
+                    {['INFO', 'GUESTS', 'CREW'].map((x, i) =>
+                        <div onClick={() => setSubTab(i)} key={i}> {x} </div>
+                    )}
+                </div>
+                {subTab === 0 && <>
+                    <div> {episode?.overview} </div>
+                </>}
+                {subTab === 1 && <>
+                    {episode?.guest_stars?.map((x, i) => <div className='row' key={i}>
+                        {x?.profile_path && <>
+                            <div className='col'>
+                                <img src={IMG + x?.profile_path} alt='' />
+                            </div>
+                        </>}
+                        <div className='col'>
+                            <div> {x?.name} </div>
+                            <div> {x?.character} </div>
+                        </div>
+                    </div>)}
+                </>}
+                {subTab === 2 && <>
+                    {episode?.crew?.map((x, i) => <div className='row' key={i}>
+                        {x?.profile_path && <>
+                            <div className='col'>
+                                <img src={IMG + x?.profile_path} alt='' />
+                            </div>
+                        </>}
+                        <div className='col'>
+                            <div> {x?.name} </div>
+                            <div> {x?.job} </div>
+                        </div>
+                    </div>)}
+                </>}
             </>}
         </div>
     </>
