@@ -5,7 +5,7 @@ const api = 'https://api.themoviedb.org/3'
 const api_key = token.api_key
 
 export const TMDB = {
-    find: async function (query) {
+    find: async function (query: string) {
         let x = await axios.get(`${api}/search/multi`, {
             params: {
                 api_key,
@@ -14,7 +14,7 @@ export const TMDB = {
         })
         return x.data
     },
-    movie: async function (id) {
+    movie: async function (id: string) {
         let x = await axios.get(`${api}/movie/${id}`, {
             params: {
                 api_key,
@@ -23,7 +23,7 @@ export const TMDB = {
         })
         return x.data
     },
-    show: async function (id) {
+    show: async function (id: string) {
         let x = await axios.get(`${api}/tv/${id}`, {
             params: {
                 api_key,
@@ -32,7 +32,7 @@ export const TMDB = {
         })
         return x.data
     },
-    person: async function (id) {
+    person: async function (id: string) {
         let x = await axios.get(`${api}/person/${id}`, {
             params: {
                 api_key,
@@ -41,7 +41,7 @@ export const TMDB = {
         })
         return x.data
     },
-    season: async function (id, season_number) {
+    season: async function (id: string, season_number: string) {
         let x = await axios.get(`${api}/tv/${id}/season/${season_number}`, {
             params: {
                 api_key,
@@ -50,7 +50,7 @@ export const TMDB = {
         })
         return x.data
     },
-    episode: async function (id, season_number, episode_number) {
+    episode: async function (id: string, season_number: string, episode_number: string) {
         let x = await axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${season_number}/episode/${episode_number}`, {
             params: {
                 api_key

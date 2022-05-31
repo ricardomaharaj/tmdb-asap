@@ -6,13 +6,13 @@ const IMGW = 'https://www.themoviedb.org/t/p/w227_and_h127_bestv2'
 
 export function App() {
 
-    let [tab, setTab] = useState(0)
-    let [subTab, setSubTab] = useState(0)
-    let [results, setResults] = useState([{}])
-    let [movie, setMovie] = useState({})
-    let [show, setShow] = useState({})
-    let [season, setSeason] = useState({})
-    let [episode, setEpisode] = useState({})
+    let [tab, setTab] = useState<number>(0)
+    let [subTab, setSubTab] = useState<number>(0)
+    let [results, setResults] = useState<any>([{}])
+    let [movie, setMovie] = useState<any>({})
+    let [show, setShow] = useState<any>({})
+    let [season, setSeason] = useState<any>({})
+    let [episode, setEpisode] = useState<any>({})
 
     return <>
         <div className='col'>
@@ -23,7 +23,7 @@ export function App() {
                 <div className='row'>
                     <input type='text' onKeyDown={e => e.key === 'Enter' ? TMDB.find(e.currentTarget.value).then(x => setResults(x?.results)) : null} />
                 </div>
-                {results?.map((x, i) =>
+                {results?.map((x: any, i: number) =>
                     <div className='row' onClick={() => {
                         switch (x?.media_type) {
                             case 'movie':
@@ -68,13 +68,13 @@ export function App() {
                     </div>
                 </div>
                 <div className='row'>
-                    {['INFO', 'CAST', 'CREW'].map((x, i) => <div onClick={() => setSubTab(i)} key={i}> {x} </div>)}
+                    {['INFO', 'CAST', 'CREW'].map((x: any, i: number) => <div onClick={() => setSubTab(i)} key={i}> {x} </div>)}
                 </div>
                 {subTab === 0 && <>
                     <div> {movie?.overview} </div>
                 </>}
                 {subTab === 1 && <>
-                    {movie?.credits?.cast?.map((x, i) => <div className='row' key={i}>
+                    {movie?.credits?.cast?.map((x: any, i: number) => <div className='row' key={i}>
                         {x?.profile_path && <>
                             <div className='col'>
                                 <img src={IMG + x?.profile_path} alt='' />
@@ -87,7 +87,7 @@ export function App() {
                     </div>)}
                 </>}
                 {subTab === 2 && <>
-                    {movie?.credits.crew.map((x, i) => <div className='row' key={i}>
+                    {movie?.credits.crew.map((x: any, i: number) => <div className='row' key={i}>
                         {x?.profile_path && <>
                             <div className='col'>
                                 <img src={IMG + x?.profile_path} alt='' />
@@ -116,13 +116,13 @@ export function App() {
                     </div>
                 </div>
                 <div className='row'>
-                    {['INFO', 'SEASONS', 'CAST', 'CREW'].map((x, i) => <div onClick={() => setSubTab(i)} key={i}> {x} </div>)}
+                    {['INFO', 'SEASONS', 'CAST', 'CREW'].map((x: any, i: number) => <div onClick={() => setSubTab(i)} key={i}> {x} </div>)}
                 </div>
                 {subTab === 0 && <>
                     <div> {show?.overview} </div>
                 </>}
                 {subTab === 1 && <>
-                    {show?.seasons.map((x, i) =>
+                    {show?.seasons.map((x: any, i: number) =>
                         <div onClick={() => {
                             TMDB.season(show?.id, x?.season_number)
                                 .then(x => setSeason(x))
@@ -142,7 +142,7 @@ export function App() {
                     )}
                 </>}
                 {subTab === 2 && <>
-                    {show?.credits?.cast?.map((x, i) => <div className='row' key={i}>
+                    {show?.credits?.cast?.map((x: any, i: number) => <div className='row' key={i}>
                         {x?.profile_path && <>
                             <div className='col'>
                                 <img src={IMG + x?.profile_path} alt='' />
@@ -155,7 +155,7 @@ export function App() {
                     </div>)}
                 </>}
                 {subTab === 3 && <>
-                    {show?.credits?.crew?.map((x, i) => <div className='row' key={i}>
+                    {show?.credits?.crew?.map((x: any, i: number) => <div className='row' key={i}>
                         {x?.profile_path && <>
                             <div className='col'>
                                 <img src={IMG + x?.profile_path} alt='' />
@@ -184,13 +184,13 @@ export function App() {
                     </div>
                 </div>
                 <div className='row'>
-                    {['INFO', 'EPISODES'].map((x, i) => <div onClick={() => setSubTab(i)} key={i}> {x} </div>)}
+                    {['INFO', 'EPISODES'].map((x: any, i: number) => <div onClick={() => setSubTab(i)} key={i}> {x} </div>)}
                 </div>
                 {subTab === 0 && <>
                     <div> {season?.overview} </div>
                 </>}
                 {subTab === 1 && <>
-                    {season?.episodes?.map((x, i) =>
+                    {season?.episodes?.map((x: any, i: number) =>
                         <div onClick={() => {
                             TMDB.episode(show?.id, season?.season_number, x?.episode_number)
                                 .then(x => setEpisode(x))
@@ -224,7 +224,7 @@ export function App() {
                     </div>
                 </div>
                 <div className='row'>
-                    {['INFO', 'GUESTS', 'CREW'].map((x, i) =>
+                    {['INFO', 'GUESTS', 'CREW'].map((x: any, i: number) =>
                         <div onClick={() => setSubTab(i)} key={i}> {x} </div>
                     )}
                 </div>
@@ -232,7 +232,7 @@ export function App() {
                     <div> {episode?.overview} </div>
                 </>}
                 {subTab === 1 && <>
-                    {episode?.guest_stars?.map((x, i) => <div className='row' key={i}>
+                    {episode?.guest_stars?.map((x: any, i: number) => <div className='row' key={i}>
                         {x?.profile_path && <>
                             <div className='col'>
                                 <img src={IMG + x?.profile_path} alt='' />
@@ -245,7 +245,7 @@ export function App() {
                     </div>)}
                 </>}
                 {subTab === 2 && <>
-                    {episode?.crew?.map((x, i) => <div className='row' key={i}>
+                    {episode?.crew?.map((x: any, i: number) => <div className='row' key={i}>
                         {x?.profile_path && <>
                             <div className='col'>
                                 <img src={IMG + x?.profile_path} alt='' />

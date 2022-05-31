@@ -1,3 +1,3 @@
-# TMDB-ASAP
+# TMDB ASAP
 
-This is a different take on my project [TMDB Quickly](https://github.com/ricardomaharaj/TMDB-Quickly)
+This is a new take on my other project [TMDB Quickly](https://github.com/ricardomaharaj/TMDB-Quickly)
